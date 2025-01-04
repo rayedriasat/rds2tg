@@ -15,6 +15,7 @@ telegram-course-bot
 ├── src
 │   ├── bot.py               # Main entry point for the Telegram bot
 │   ├── scraper.py           # Logic for scraping course data
+|   ├── config.py                # Configuration settings for the bot
 │   ├── handlers
 │   │   ├── search_course.py  # Handles the /searchcourse command
 │   │   ├── filter_course.py  # Handles the /filter command
@@ -23,7 +24,6 @@ telegram-course-bot
 │       └── formatter.py     # Utility functions for formatting data
 ├── requirements.txt         # Project dependencies
 ├── README.md                # Project documentation
-└── config.py                # Configuration settings for the bot
 ```
 
 ## Installation
@@ -49,7 +49,7 @@ telegram-course-bot
   ```
 
 - Use the following commands in Telegram:
-  - `/searchcourse <course_code>`: Search for a specific course.
+  - `/search <course_code>`: Search for a specific course.
   - `/filter <criteria>`: Filter courses by faculty, section, or schedule.
   - `/help`: Get a list of available commands.
 
