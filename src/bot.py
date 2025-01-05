@@ -103,7 +103,7 @@ def main() -> None:
     state.application = Application.builder().token(TOKEN).job_queue(job_queue).build()
 
     logger.info("Setting up job queue...")  # Add setup log
-    state.application.job_queue.run_repeating(periodic_scrape, interval=300, first=15)
+    state.application.job_queue.run_repeating(periodic_scrape, interval=450, first=60)
 
     # Register handlers
     state.application.add_handler(CommandHandler("start", help_command))
