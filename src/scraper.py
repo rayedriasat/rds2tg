@@ -2,19 +2,27 @@ import requests
 from bs4 import BeautifulSoup
 from config import WEBPAGE_URL
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
 
 def scrape_courses():
     try:
-        response = requests.get(WEBPAGE_URL)
-        response.raise_for_status()  # Raises an HTTPError for bad responses
-
+        SESSION_COOKIE = os.getenv("SESSION_COOKIE")
+        CAPTCHA_TOKEN = os.getenv("CAPTCHA_TOKEN")
+        headers = {
+            "Cookie": f"ci_session={SESSION_COOKIE}",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.",
+            "Local-Storage": '{"_grecaptcha":' + CAPTCHA_TOKEN + "}",
+        }
+        response = requests.get(WEBPAGE_URL, verify=False, headers=headers)
+        response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
         courses = []
 
         # Find the table with the course data
+        logger.info(soup.prettify())
         table = soup.find("table", {"id": "offeredCourseTbl"})
         if table is None:
             logger.error("Failed to find the course table on the webpage")
