@@ -22,7 +22,6 @@ def scrape_courses():
         courses = []
 
         # Find the table with the course data
-        logger.info(soup.prettify())
         table = soup.find("table", {"id": "offeredCourseTbl"})
         if table is None:
             logger.error("Failed to find the course table on the webpage")
